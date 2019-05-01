@@ -13,6 +13,7 @@ Card::Card(char x, char y) {
     }
 
 bool Card::operator==(const Card& c) {
+      // Testing value equality
       if (suit == c.suit && value == c.value) return true;
       return false;
     }
@@ -27,15 +28,15 @@ int Hand::contains(Card* c) {
       Card* iter = first;
       while(iter) {
 	count++;      
-        if (iter == c) return count;
+        if (*iter == *c) return count; // Returns location of the equal card
 	iter = iter->next;
       }
       return 0;
     }
     
 void Hand::remove(int x) {
-      if (x == 0) return;
-      if (x == 1) {
+      if (x == 0) return;  // base case
+      if (x == 1) { // first node
 	if (first == last) delete first;
 	else {
 	  Card* temp = first;
@@ -47,7 +48,7 @@ void Hand::remove(int x) {
       else {
 	int count = 2;
         Card* iter = first;
-	while(iter) {
+	while(iter) { // iterate through
 	  if (x == count) {
 	    Card* temp = iter->next;
 	    iter->next = iter->next->next;
@@ -61,17 +62,17 @@ void Hand::remove(int x) {
     }
 
 void Hand::add(Card* c) {
-      if (!first && !last) {
+      if (!first && !last) { // Empty list
         first = c;
 	last = c;
       }
-      else {
+      else { // Append to end of list
       last->next = c;
       last = c;
       }
     }
 
-Hand::~Hand() {
+Hand::~Hand() { // Destructor
       if (first == last) delete first;
       else {
       Card* iter = first;

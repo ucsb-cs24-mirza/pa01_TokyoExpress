@@ -32,6 +32,9 @@ int main(int argv, char** argc){
 
   char suit;
   char value;
+
+  // Inputting Cards Into Linked List
+  
   while (getline (cardFile1, line) && (line.length() > 0)){
     suit = line[0];
     value = line[2];
@@ -46,11 +49,41 @@ int main(int argv, char** argc){
   }
   cardFile2.close();
 
-  bool gameActive = 1;
-  char turn = 'a'; // Alice's turn first
-  bool matchFound = 0;
+  // Finished inputting
 
+  bool gameActive = 1; // Game tracker
+  bool matchFound = 0; // Token variable
   
+  while(gameActive) {
+    // Alice's turn
+    for (Card*iter = alice.first; iter != NULL; iter = iter->next) {
+      if (bob.contains(iter)) {
+	cout << "Alice picked matching card " << *iter << endl;
+        bob.remove(bob.contains(iter)); // removing both
+	alice.remove(alice.contains(iter));
+	matchFound = 1;
+	break; // break out of loop if match found
+      }
+    }
+    if (matchFound == 0) gameActive = 0; // no match = game over
+    if (matchFound == 1) {
+      matchFound = 0; // reset token variable
+      // Bob's turn
+      for (Card*iter = bob.first; iter != NULL; iter = iter->next) {
+        if (alice.contains(iter)) {
+	  cout << "Bob picked matching card " << *iter << endl;
+          alice.remove(alice.contains(iter)); // removing both
+	  bob.remove(bob.contains(iter));
+	  matchFound = 1;
+	  break;
+      }
+    }
+    if (matchFound == 0) gameActive = 0; // no match = game over
+    }
+  }
+  
+  // Final output
+
   cout << "Alice's cards: " << endl;
   for (Card *iter = alice.first; iter != NULL; iter = iter->next) {
     cout << *iter << endl;    

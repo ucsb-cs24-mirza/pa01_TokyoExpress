@@ -36,10 +36,18 @@ void test_equal(){
 
 void test_card(){
   START_TEST("test_card");
+  START_TEST("test_equal");
   test_card_operator_double_equal();
+  END_TEST("test_equal");
+  START_TEST("test_contains");
   test_contains();
+  END_TEST("test_contains");
+  START_TEST("test_add");
   test_add();
+  END_TEST("test_add");
+  START_TEST("test_remove");
   test_remove();
+  END_TEST("test_remove");
   //test_equal_single_element_list();
   END_TEST("test_card");
 }
@@ -60,8 +68,11 @@ void test_equal_empty_list(){
 
 void test_contains() {
   Hand h;
-  Card c('s', '1');
-  Card d('h', 'k');
+  Card* c = new Card('s', '1');
+  Card* d = new Card('h', 'k');
+  h.add(new Card('s', '1'));
+  cout << h.contains(c) << endl;
+  cout << h.contains(d) << endl;
 } 
 
 void test_add() {

@@ -14,11 +14,14 @@ class Card {
     char suit;
     char value;
     Card *next;
-
+    
+    // Constructor
     Card(char x, char y);
     
+    // Equality Overload
     bool operator == (const Card& c);
     
+    // Output Overload
     friend ostream& operator<<(ostream& os, Card& c) {
       os << c.suit << " " << c.value;
       return os;
@@ -31,7 +34,7 @@ class Hand {
   public:
     Card* first;
     Card* last;
-    Hand();
+    Hand(); // Constructor
     int contains(Card* c);
     // Precondition: Card value is inputted
     // Postcondition: If card is found, location will be outputted. 
@@ -40,6 +43,8 @@ class Hand {
     // Precondition: Location value is inputted
     // Postcondition: Card at that location will be removed.
     void add(Card* c);
+    // Precondition: Non-empty card is inputted.
+    // Postcondition: New card with those values will be added to hand.
 
-    ~Hand();
+    ~Hand(); // Destructor
 };
