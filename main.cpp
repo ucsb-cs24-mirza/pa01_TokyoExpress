@@ -81,14 +81,14 @@ int main(int argv, char** argc){
     if (matchFound == 0) gameActive = 0; // no match = game over
     }
   }
-  
+  cout << endl;
   // Final output
 
   cout << "Alice's cards: " << endl;
   for (Card *iter = alice.first; iter != NULL; iter = iter->next) {
     cout << *iter << endl;    
   }
-
+  cout << endl;
   cout << "Bob's cards: " << endl;
   for (Card *iter2 = bob.first; iter2 != NULL; iter2 = iter2->next) {
     cout << *iter2 << endl;    
